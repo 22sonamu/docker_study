@@ -7,5 +7,8 @@ COPY requirements.txt requirements.txt
 
 #FLASK 설치 위함
 RUN pip install --no-cache-dir -r requirements.txt
+#pymysql 설치 위함
+RUN pip3 install PyMySQL
+
 
 CMD ["python", "backend.py"]
