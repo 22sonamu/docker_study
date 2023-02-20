@@ -12,6 +12,9 @@ services:
     #   - my-app
     ports :
       - 5432:5432
+    volumes : 
+      - test-vol:/var/lib/docker/volumes/test-vol/_data
+
   adminer:
     image: adminer
     restart: always
@@ -28,6 +31,6 @@ services:
   #   ports : 
   #     - 8081:3000
     
-
-networks :
-  my-app : 
+volumes :
+  test-vol :
+    external : true
