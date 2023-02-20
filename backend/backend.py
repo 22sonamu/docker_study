@@ -19,7 +19,7 @@ def get():
     row = cur.fetchone()
     conn.commit()
     conn.close()
-    return str(row[0])
+    return jsonify({"count" : str(row[0])}), 200
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=int(os.environ.get("PORT", 5000)))
