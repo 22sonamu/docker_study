@@ -1,0 +1,33 @@
+version: '3'
+
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: example
+      POSTGRES_USER : example
+    #db 에서 myapp 에 접근가능
+    # networks :
+    #   - my-app
+    ports :
+      - 5432:5432
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8080:8080
+  ## python , flask
+  backend :
+    image : backend:2.0
+    ports : 
+      - 8081:5000
+   ## 프론트앤드
+  # frontend :
+  #   image : front
+  #   ports : 
+  #     - 8081:3000
+    
+
+networks :
+  my-app : 

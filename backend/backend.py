@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-import pymysql
+import psycopg2
 import os
 
 app = Flask(__name__)
@@ -12,7 +12,7 @@ def get_user_info(count):
 
 @app.route("/get")
 def get():
-    conn = pymysql.connect(host='127.0.0.1',port=5432, user='example', password='example', db='count', charset='utf8')
+    conn = psycopg2.connect(host='db',port=5432, user='example', password='example', dbname='count')
     cur = conn.cursor()
     sql = 'select * from count'
     cur.execute(sql)
