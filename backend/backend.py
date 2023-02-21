@@ -5,9 +5,14 @@ import os
 app = Flask(__name__)
 
 
-
 @app.route('/update/<count>')
 def get_user_info(count):
+    conn = psycopg2.connect(host='db',port=5432, user='example', password='example', dbname='count')
+    cur = conn.cursor()
+    sql = 'update count set num_count =' + count
+    cur.execute(sql)
+    conn.commit()
+    conn.close()
     return jsonify({"count": count}), 200
 
 @app.route("/get")
