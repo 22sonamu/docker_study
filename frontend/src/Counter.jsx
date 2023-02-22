@@ -1,9 +1,10 @@
 
 //Counter.jsx
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
-const Counter = () => {
-  const [count, setCount] = useState(0);
+const Counter = (props) => {
+
+  const [count, setCount] = useState(props.initCount);
 
   const onIncrease = () => {
     setCount(prevCount => prevCount + 1);
