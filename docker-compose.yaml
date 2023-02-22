@@ -25,11 +25,11 @@ services:
     image : backend:2.0
     ports : 
       - 8081:5000
-   ## 프론트앤드
-  # frontend :
-  #   image : front
-  #   ports : 
-  #     - 8081:3000
+   # 프론트앤드
+  frontend :
+    image : frontend:2.0
+    ports : 
+      - 8082:3000
     
 volumes :
   test-vol :
