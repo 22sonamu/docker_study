@@ -1,0 +1,14 @@
+apiVersion : v1
+kind : Pod
+metadata :
+  name : nginx
+  labels : # 마음대로 작성할 수 있다.
+    app : nginx
+    tier : frontend
+spec : # 해당 노트에 어떤 것들이 있는지 작성
+  containers : 
+    - name : nginx
+      image : nginx #hub 에서 image 이름
+    # - name : busybox
+    #   image : busybox
+ 
