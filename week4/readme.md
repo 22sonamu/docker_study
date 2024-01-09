@@ -130,3 +130,50 @@ spec :
 ```
 
 
+## static pod
+
+```shell
+kubectl get pods -n kube-system #확인 명령어
+```
+
+![Alt text](image/image5.png)
+해당 경로에서 kubelet 설정 파일을 확인 할 수 있고, 정적 pod의 위치 정의도 볼 수 있음    
+config.yaml에 정의된 루트에 pod 설정 파일을 집어넣어 놓으면 , 알아서 pod 가 생성되고 죽어도 다시 생성됨
+
+
+## multiple Schedulers
+
+```yaml
+apiVersion : kubescheduler.config.k8s.io/v1
+kind : KubeSchedulerConfiguration
+profile :
+    - schedulername : default-scheduler
+leaderElection :
+    # pod가 여러 node 에서 동시에 배치 있도록 설정
+    # 그 중 하나(리더)가 실행되도록 함
+    leaderElect : true
+    resourceNamespace : kube-system
+    resourceName : lock-object-my-scheduler 
+```
+
+![Alt text](image/image6.png)
+
+
+#### pod에 스케줄러 지정해주기
+
+```yaml
+apiVersion : v1
+kind : Pod
+metadata :
+    name : my-custom-scheduler
+    namespace : kube-system
+spec :
+    conatiner :
+    - command :
+        #scheduler 지정
+        - kube-scheduler
+        - --address=127.0.0.1
+        - --kubeconfig=/etc/kubernetes/scheduler.conf
+        # 위에서 작성한 config 파일
+        - --config=/etc/kubernetes/my-scheduler-config.yaml
+```
